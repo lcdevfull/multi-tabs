@@ -83,7 +83,7 @@ ul li {
   border-bottom: 0;
 }
 
-.sub-tab-buttons li:hover {
+.sub-tab-buttons li:hover, .sub-tab-buttons li.active {
   background: #fff;
 }
 

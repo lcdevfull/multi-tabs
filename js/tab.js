@@ -4,31 +4,68 @@ export default class Tab {
     this.tabContent = document.querySelectorAll(tabContent);
     this.activeTab = 0;
     this.activeClass = 'active';
+    this.newEvent = new Event('changetabbutton');
 
-    // Bind
-    // this.activeTabAndButton = this.activeTabAndButton.bind(this);
-
-    this.addEventInButton();
+    this.activeTabAndButton(this.tabButtons[0], this.tabButtons, this.tabContent, 0);
+    this.addEventInButton(this.tabButtons, this.tabContent);
   }
 
-  addEventInButton() {
-    this.tabButtons.forEach((button, index) => {
+  addEventInButton(buttons, contents) {
+    buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
-        this.activeTabAndButton(button, index);
+        this.activeTabAndButton(button, buttons, contents, index);
+        this.tabButtons.forEach((button) => {
+          button.dispatchEvent(this.newEvent);
+        });
       });
     });
   }
 
-  activeTabAndButton(item, index) {
-    this.tabButtons.forEach((tab, i) => {
-      tab.classList.remove(this.activeClass); 
-      this.tabContent[i].classList.remove(this.activeClass);
+  clearActiveElements(buttons, container) {
+    buttons.forEach((button, i) => {
+      button.classList.remove(this.activeClass);
+      container[i].classList.remove(this.activeClass);
     });
-
-    item.classList.add(this.activeClass);
-    this.tabContent[index].classList.add(this.activeClass);
-    this.activeTab = index;
-    return this.activeTab;
   }
 
+  activeTabAndButton(currentButton, buttons, contents, index) {
+    this.clearActiveElements(buttons, contents);
+
+    currentButton.classList.add(this.activeClass);
+    contents[index].classList.add(this.activeClass);
+
+    if(buttons === this.tabButtons && contents === this.tabContent) {
+      this.activeTab = index;
+    }
+  }
+
+
+  // Função a ser concertada
+  getSubTabItems(element, select) {
+    const selection = element.querySelectorAll(select);
+
+    return [...selection];
+  }
+
+  // Função a ser concertada
+  activeFirstSubTab(selector) {
+    const items = this.getSubTabItems(this.tabContent[this.activeTab], selector);
+    console.log(items);
+    this.clearActiveElements(this.subButtons, this.subContainers);
+    items[0].classList.add(this.activeClass);
+  }
+
+  subTab(subButtons, subContainers) {
+    this.subButtons = document.querySelectorAll(subButtons);
+    this.subContainers = document.querySelectorAll(subContainers);
+    this.activeTabAndButton(this.subButtons[0], this.subButtons, this.subContainers, 0);
+    
+    // this.tabButtons.forEach((button) => {
+    //   button.addEventListener('changetabbutton', () => {
+    //     this.activeFirstSubTab(subButtons);
+    //     this.activeFirstSubTab(subContainers);
+    //   });
+    // }); 
+    this.addEventInButton(this.subButtons, this.subContainers);
+  }
 }
