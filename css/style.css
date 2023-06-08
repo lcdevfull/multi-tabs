@@ -1,0 +1,53 @@
+/* Geral */
+
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #555;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+/* Tab */
+
+.container {
+  width: 80vw;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.tab-container {
+  margin: 40px 0;
+}
+
+.tab-buttons {
+  display: flex;
+  border: 2px solid #ED4D6E;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tab-buttons li {
+  border-right: 2px solid #ED4D6E;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.tab-buttons li:last-child {
+  border-right: none;
+}
+
+.tab-buttons li:hover {
+  background: #FDECF0;
+}
