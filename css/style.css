@@ -42,6 +42,7 @@ ul li {
   cursor: pointer;
   font-weight: bold;
   width: 100%;
+  color: #370612;
 }
 
 .tab-buttons li:last-child {
@@ -50,4 +51,46 @@ ul li {
 
 .tab-buttons li:hover {
   background: #FDECF0;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px 0;
+}
+
+.tab-content.active {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-gap: 20px;
+}
+
+.sub-tab-buttons {
+  background: #FDECF0;
+  border-radius: 8px;
+  border: 2px solid #ED4D6E;
+  overflow: hidden;
+} 
+
+.sub-tab-buttons li {
+  padding: 16px 12px;
+  border-bottom: 2px solid #ED4D6E;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
+}
+
+.sub-tab-buttons li:last-child {
+  border-bottom: 0;
+}
+
+.sub-tab-buttons li:hover {
+  background: #fff;
+}
+
+.sub-tab-content {
+  display: none;
+}
+
+.sub-tab-content.active {
+  display: initial;
 }
