@@ -14,9 +14,6 @@ export default class Tab {
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
         this.activeTabAndButton(button, buttons, contents, index);
-        this.tabButtons.forEach((button) => {
-          button.dispatchEvent(this.newEvent);
-        });
       });
     });
   }
@@ -36,36 +33,39 @@ export default class Tab {
 
     if(buttons === this.tabButtons && contents === this.tabContent) {
       this.activeTab = index;
+
+      this.tabButtons.forEach((item) => {
+        item.dispatchEvent(this.newEvent);  
+      });
     }
   }
 
+  /**
+   * Lógica
+   * - Quando algum botão da tab principal for clicado, 
+   */
 
-  // Função a ser concertada
-  getSubTabItems(element, select) {
-    const selection = element.querySelectorAll(select);
+  getSubtabAtualContent(element, containers, buttons) {
+  const localContainers = element.querySelectorAll(containers);
+  const localButtons = element.querySelectorAll(buttons);
 
-    return [...selection];
-  }
 
-  // Função a ser concertada
-  activeFirstSubTab(selector) {
-    const items = this.getSubTabItems(this.tabContent[this.activeTab], selector);
-    console.log(items);
-    this.clearActiveElements(this.subButtons, this.subContainers);
-    items[0].classList.add(this.activeClass);
+  localContainers[0].classList.add(this.activeClass);
+  localButtons[0].classList.add(this.activeClass);
+
   }
 
   subTab(subButtons, subContainers) {
     this.subButtons = document.querySelectorAll(subButtons);
     this.subContainers = document.querySelectorAll(subContainers);
     this.activeTabAndButton(this.subButtons[0], this.subButtons, this.subContainers, 0);
-    
-    // this.tabButtons.forEach((button) => {
-    //   button.addEventListener('changetabbutton', () => {
-    //     this.activeFirstSubTab(subButtons);
-    //     this.activeFirstSubTab(subContainers);
-    //   });
-    // }); 
     this.addEventInButton(this.subButtons, this.subContainers);
+
+    this.tabButtons.forEach((item) => {
+      item.addEventListener('changetabbutton', () => {
+        this.getSubtabAtualContent(this.tabContent[this.activeTab], subContainers, subButtons);
+      });
+    });
+
   }
 }
