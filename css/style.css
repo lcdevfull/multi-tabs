@@ -41,7 +41,7 @@ ul li {
   box-sizing: border-box;
   cursor: pointer;
   font-weight: bold;
-  width: 100%;
+  flex-grow: 1;
   color: #370612;
 }
 
@@ -49,7 +49,7 @@ ul li {
   border-right: none;
 }
 
-.tab-buttons li:hover {
+.tab-buttons li:hover, .tab-buttons li.active {
   background: #FDECF0;
 }
 
