@@ -33,23 +33,16 @@ export default class Tab {
 
     if(buttons === this.tabButtons && contents === this.tabContent) {
       this.activeTab = index;
-
-      this.tabButtons.forEach((item) => {
-        item.dispatchEvent(this.newEvent);  
-      });
+      this.tabButtons.forEach((item) => item.dispatchEvent(this.newEvent));
     }
   }
 
-  /**
-   * Lógica
-   * - Quando algum botão da tab principal for clicado, 
-   */
-
+  //SubTab
   getSubtabAtualContent(element, containers, buttons) {
   const localContainers = element.querySelectorAll(containers);
   const localButtons = element.querySelectorAll(buttons);
 
-
+  this.clearActiveElements(this.subButtons, this.subContainers);
   localContainers[0].classList.add(this.activeClass);
   localButtons[0].classList.add(this.activeClass);
 
@@ -66,6 +59,5 @@ export default class Tab {
         this.getSubtabAtualContent(this.tabContent[this.activeTab], subContainers, subButtons);
       });
     });
-
   }
 }

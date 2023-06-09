@@ -1,3 +1,4 @@
+@import url('video.css');
 /* Geral */
 
 body {
@@ -59,9 +60,11 @@ ul li {
 }
 
 .tab-content.active {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-gap: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  animation: show .3s ease-in;
 }
 
 .sub-tab-buttons {
@@ -69,7 +72,15 @@ ul li {
   border-radius: 8px;
   border: 2px solid #ED4D6E;
   overflow: hidden;
+  max-width: 300px;
 } 
+
+@media (max-width: 720px) {
+  .sub-tab-buttons {
+    max-width: 100%;
+    width: 100%;
+  }
+}
 
 .sub-tab-buttons li {
   padding: 16px 12px;
@@ -93,4 +104,30 @@ ul li {
 
 .sub-tab-content.active {
   display: initial;
+  flex-grow: 1;
+  animation: showSub .4s ease-out;
+}
+
+@keyframes show {
+  from {
+    transform: translateX(-40px);
+    opacity: .2;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes showSub {
+  from {
+    transform: translateY(40px);
+    filter: blur(5px);
+  }
+
+  to {
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }

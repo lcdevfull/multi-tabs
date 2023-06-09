@@ -1,0 +1,21 @@
+.yt-holder {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding: 25%;
+  /* border: 1px solid #000; */
+}
+
+.yt-holder > iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+@media (max-width: 720px) {
+  .yt-holder {
+    padding: 30%;
+  }
+}
